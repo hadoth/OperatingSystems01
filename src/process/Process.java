@@ -1,51 +1,52 @@
 package process;
 
+import java.util.UUID;
+
 /**
  * Class stores basic process characteristics for CPU scheduling simulation
  * Created by Karol Pokomeda on 2017-03-14.
  */
 public class Process {
-
-    private static int idBase = 1;
-    private int processID;
-    private String name;
+   private UUID processId;
+    private String processName;
+    private int processArrivalTime;
     private int burstTime;
-    private int arrivalTime;
-    private int remainingTime;
+    private int burstTimeEstimate;
 
-    public Process(String name, int burstTime, int arrivalTime){
-        this.processID = idGenerator();
-        this.name = name;
+    public Process(UUID processId, String processName, int processArrivalTime, int burstTime, int burstTimeEstimate){
+        this.processId = processId;
+        this.processName = processName;
+        this.processArrivalTime = processArrivalTime;
         this.burstTime = burstTime;
-        this.remainingTime = burstTime;
-        this.arrivalTime = arrivalTime;
+        this.burstTimeEstimate = burstTimeEstimate;
     }
 
-    public int tick(){
-        return --this.remainingTime;
+    public UUID getProcessId() {
+        return processId;
     }
 
-    public int getBurstTime(){
-        return this.burstTime;
+    public String getProcessName() {
+        return processName;
     }
 
-    public int getRemainingTime(){
-        return this.remainingTime;
+    public int getProcessArrivalTime() {
+        return processArrivalTime;
     }
 
-    public int getArrivalTime(){
-        return this.arrivalTime;
+    public int getBurstTime() {
+        return burstTime;
     }
 
-    public String getName(){
-        return this.name;
+    public int getBurstTimeEstimate() {
+        return burstTimeEstimate;
     }
 
     public String toString(){
-        return this.processID + ",\t" + this.name + ",\t" + this.burstTime + ",\t" + this.arrivalTime + ",\n";
-    }
-
-    private static int idGenerator(){
-        return idBase++;
+        return
+                this.processId.toString() + ", " +
+                this.processName + ", " +
+                this.processArrivalTime + ", " +
+                this.burstTime + ", " +
+                this.burstTimeEstimate + ",";
     }
 }
