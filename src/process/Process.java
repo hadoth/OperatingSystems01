@@ -8,25 +8,30 @@ import java.util.UUID;
  */
 public class Process {
    private UUID processId;
-    private String processName;
     private int processArrivalTime;
     private int burstTime;
     private int burstTimeEstimate;
+    private int burstStartTime;
+    private boolean started = false;
+    private int burstEndTime;
+    private boolean finished = false;
+    private int firstResultTime;
+    private boolean firstResultDone = false;
 
-    public Process(UUID processId, String processName, int processArrivalTime, int burstTime, int burstTimeEstimate){
+    public Process(UUID processId, int processArrivalTime, int burstTime, int burstTimeEstimate){
         this.processId = processId;
-        this.processName = processName;
         this.processArrivalTime = processArrivalTime;
         this.burstTime = burstTime;
         this.burstTimeEstimate = burstTimeEstimate;
     }
 
-    public UUID getProcessId() {
-        return processId;
+    public void tick(){
+        this.burstTime--;
+        if (this.burstTimeEstimate > 0) this.burstTimeEstimate--;
     }
 
-    public String getProcessName() {
-        return processName;
+    public UUID getProcessId() {
+        return processId;
     }
 
     public int getProcessArrivalTime() {
@@ -41,12 +46,50 @@ public class Process {
         return burstTimeEstimate;
     }
 
+    public boolean isStarted(){
+        return this.started;
+    }
+
+    public void startProcess(int processorTime){
+        this.started = true;
+        this.burstStartTime = processorTime;
+    }
+
+    public boolean isFinished(){
+        return this.finished;
+    }
+
+    public void endProcess(int processorTime){
+        this.finished = true;
+        this.burstEndTime = processorTime;
+    }
+
+    public boolean isFirstResultDone(){
+        return this.firstResultDone;
+    }
+
+    public void finishFirstPart(int processorTime){
+        this.firstResultDone = true;
+        this.firstResultTime = processorTime;
+    }
+
     public String toString(){
         return
                 this.processId.toString() + ", " +
-                this.processName + ", " +
                 this.processArrivalTime + ", " +
                 this.burstTime + ", " +
-                this.burstTimeEstimate + ",";
+                this.burstTimeEstimate + ", ";
+    }
+
+    public int getWaitTime(){
+        return this.burstStartTime - this.processArrivalTime;
+    }
+
+    public int getResponseTime(){
+        return this.firstResultTime - this.processArrivalTime;
+    }
+
+    public int getTurnaroundTime(){
+        return this.burstEndTime - this.processArrivalTime;
     }
 }

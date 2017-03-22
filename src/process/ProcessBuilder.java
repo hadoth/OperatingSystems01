@@ -7,7 +7,6 @@ import java.util.UUID;
  */
 public class ProcessBuilder {
     private UUID processId = UUID.randomUUID();
-    private String processName = null;
     private int processArrivalTime = -1;
     private int processBurstTime = -1;
     private int processBurstTimeEstimate = -1;
@@ -19,11 +18,6 @@ public class ProcessBuilder {
 
     public ProcessBuilder withId(UUID processId){
         this.processId = processId;
-        return this;
-    }
-
-    public ProcessBuilder withName(String processName){
-        this.processName = processName;
         return this;
     }
 
@@ -50,10 +44,8 @@ public class ProcessBuilder {
         if (this.processArrivalTime < 0) throw new IllegalArgumentException("Arrival time not specified");
         if (this.processBurstTime <= 0) throw new IllegalArgumentException("Burst time not specified");
         if (this.processBurstTimeEstimate <= 0) this.processBurstTimeEstimate = this.processBurstTime;
-        if (this.processName == null) throw new IllegalArgumentException("Process name not specified");
         return new Process(
                 this.processId,
-                this.processName,
                 this.processArrivalTime,
                 this.processBurstTime,
                 this.processBurstTimeEstimate);

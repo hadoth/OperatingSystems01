@@ -5,9 +5,10 @@ package processor;
  */
 public enum ProcessorState {
     READY (0),
-    PDOCESSING_EXTERNAL(1),
-    PROCESSING_INTERNAL(2),
-    PROCESSOR_ERROR(-1);
+    PROCESSING(1),
+    CONTEXT_SWAP(2),
+    SCHEDULING(3),
+    PROCESS_ERROR(-1);
 
     private int stateCode;
 
@@ -17,5 +18,9 @@ public enum ProcessorState {
 
     public int getStateCode(){
         return this.stateCode;
+    }
+
+    public boolean equals(ProcessorState otherState){
+        return(this.getStateCode() == otherState.getStateCode());
     }
 }

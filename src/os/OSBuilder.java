@@ -1,6 +1,8 @@
 package os;
 
 import process.Process;
+import processor.Processor;
+import scheduler.Scheduler;
 
 import java.util.ArrayList;
 
@@ -18,10 +20,10 @@ public class OSBuilder {
         return this;
     }
 
-    public OSBuilder withProcessesPath(String filePath){
-        this.processList = this.loadProcess(filePath);
-        return this;
-    }
+//    public OSBuilder withProcessesPath(String filePath){
+//        this.processList = this.loadProcess(filePath);
+//        return this;
+//    }
 
     public OSBuilder withInternalScheduler(Scheduler internalScheduler){
         this.internalScheduler = internalScheduler;
@@ -38,12 +40,12 @@ public class OSBuilder {
         return this;
     }
 
-    public OperatingSystem build(){
-        return new OperatingSystemImplementation(this.systemProcessor, this.internalScheduler, this.processList, this.consoleOnFlag);
-    }
+//    public OperatingSystem build(){
+//        return new OperatingSystemImplementation(this.systemProcessor, this.internalScheduler, this.processList, this.consoleOnFlag);
+//    }
 
-    private ArrayList<Process> loadProcess(String filePath){
-        ArrayList<Process> result = new ArrayList<>();
-
-    }
+//    private ArrayList<Process> loadProcess(String filePath){
+//        ArrayList<Process> result = new ArrayList<>();
+//
+//    }
 }
