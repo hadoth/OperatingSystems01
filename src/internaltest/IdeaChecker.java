@@ -13,7 +13,8 @@ public class IdeaChecker {
     public static void main(String[] args) {
         ArrivalTimeFrequency[] arrivals = {new AllAtOnce(), new ClusterArrivals(), new ConstatntArrivalTime(), new RandomArrivalTime()};
         BurstTimeAccuracy[] est = {new HighlyRandomAccuracy(), new InMinus(), new InPlus(), new PerfectAccuracy(), new SlightlyRandomBurst()};
-        ProcessBurstTime[] time = {ProcessBurstTime.EQUAL, ProcessBurstTime.GREATER, ProcessBurstTime.SMALLER};
+//        ProcessBurstTime[] time = {ProcessBurstTime.EQUAL, ProcessBurstTime.GREATER, ProcessBurstTime.SMALLER, ProcessBurstTime.EVENBIGGER};
+        ProcessBurstTime[] time = {ProcessBurstTime.EVENBIGGER};
         ProcessBurstTrend[] trend = {new ConstantBurstTime(), new ExponentialDecrease(), new ExponentialIncrease(), new HighlyRandomClass(), new LinearDecrement(), new LinearIncrement(), new OneHuge(), new SlighlyRandomBurst()};
 
 

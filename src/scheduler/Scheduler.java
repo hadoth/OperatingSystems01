@@ -1,5 +1,6 @@
 package scheduler;
 
+import process.Process;
 import utils.Observer;
 
 /**
@@ -7,4 +8,8 @@ import utils.Observer;
  */
 public interface Scheduler extends Observer {
     public void addProcess(Process newProcess);
+
+    void push(Process process);
+
+    boolean isEmpty();
 }

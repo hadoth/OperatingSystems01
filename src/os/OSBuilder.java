@@ -3,30 +3,56 @@ package os;
 import process.Process;
 import processor.Processor;
 import scheduler.Scheduler;
+import utils.Clock;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * Created by Karol on 2017-03-19.
  */
 public class OSBuilder {
-    private ArrayList<Process> processList;
-    private Scheduler internalScheduler;
-    private boolean consoleOnFlag = false;
+    private Clock systemClock;
     private Processor systemProcessor;
+    private Scheduler systemScheduler;
+    private ArrayList<Process> processQueue;
+    private boolean consoleFlag = false;
 
-    public OSBuilder withProcesses(ArrayList<Process> processList){
-        this.processList = processList;
+    public OSBuilder withProcesses(ArrayList<Process> processQueue){
+        this.processQueue = processQueue;
         return this;
     }
 
-//    public OSBuilder withProcessesPath(String filePath){
-//        this.processList = this.loadProcess(filePath);
-//        return this;
-//    }
+    public OSBuilder withProcessSource(String filePath){
+        ArrayList<Process> result = new ArrayList<>();
+        File inputFile = new File(filePath);
+        try(FileReader fileIn = new FileReader(inputFile);
+                Scanner dataIn = new Scanner(fileIn)){
+            while(dataIn.hasNextLine()){
+                String[] processText = dataIn.nextLine().split(", ");
+                result.add(new Process(
+                        UUID.fromString(processText[0]),
+                        Integer.parseInt(processText[1]),
+                        Integer.parseInt(processText[2]),
+                        Integer.parseInt(processText[3])));
+            }
+        } catch (IOException e){
+            throw new IllegalArgumentException("File not found or data corrupted");
+        }
+        return this;
+    }
 
-    public OSBuilder withInternalScheduler(Scheduler internalScheduler){
-        this.internalScheduler = internalScheduler;
+    public OSBuilder withClock(Clock systemClock){
+        this.systemClock = systemClock;
+        return this;
+    }
+
+    public OSBuilder withSystemScheduler(Scheduler systemScheduler){
+        this.systemScheduler = systemScheduler;
         return this;
     }
 
@@ -36,16 +62,17 @@ public class OSBuilder {
     }
 
     public OSBuilder withConsoleOutput(){
-        this.consoleOnFlag = true;
+        this.consoleFlag = true;
         return this;
     }
 
-//    public OperatingSystem build(){
-//        return new OperatingSystemImplementation(this.systemProcessor, this.internalScheduler, this.processList, this.consoleOnFlag);
-//    }
-
-//    private ArrayList<Process> loadProcess(String filePath){
-//        ArrayList<Process> result = new ArrayList<>();
-//
-//    }
+    public OperatingSystemImpl build(){
+        return new OperatingSystemImpl(
+                this.systemClock,
+                this.systemProcessor,
+                this.systemScheduler,
+                this.processQueue,
+                this.consoleFlag
+        );
+    }
 }

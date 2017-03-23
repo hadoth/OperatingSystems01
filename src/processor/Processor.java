@@ -8,25 +8,20 @@ import java.util.ArrayList;
 /**
  * Created by KarolPokomeda on 2017-03-14.
  */
-public class Processor implements Observable {
+public class Processor implements Observable, Observer {
     private Process process = null;
     private ProcessorState processorStatus;
     private boolean isOn;
     private ArrayList<Observer> observerList = new ArrayList<Observer>();
     private int processorTime;
 
-    private Processor(){
+    public Processor(){
         this.processorStatus = ProcessorState.READY;
-        this.processorTime = 0;
     }
 
     public void start(){
 
     }
-
-//    public Process setProcess(){
-//
-//    }
 
     @Override
     public void addObserver(Observer observer) {
@@ -39,6 +34,15 @@ public class Processor implements Observable {
             return this.observerList.remove(observer);
         }
         return false;
+
+    }
+
+    public ProcessorState status() {
+
+    }
+
+    @Override
+    public void update(int time) {
 
     }
 
