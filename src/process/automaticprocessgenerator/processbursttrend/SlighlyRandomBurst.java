@@ -12,6 +12,11 @@ public class SlighlyRandomBurst implements ProcessBurstTrend {
     }
 
     @Override
+    public String getFullName() {
+        return "Burst time slightly randomized";
+    }
+
+    @Override
     public int[] generateBurstTime(int processCount, ProcessBurstTime burstTime) {
         int[] result = new int[processCount];
         for (int i = 0; i < processCount; i++){

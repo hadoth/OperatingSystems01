@@ -1,15 +1,19 @@
 package scheduler;
 
-import process.Process;
+import os.OperatingSystem;
+import process.ProcessImpl;
+import processor.Processor;
 import utils.Observer;
 
 /**
  * Created by Karol Pokomeda on 2017-03-19.
  */
 public interface Scheduler extends Observer {
-    public void addProcess(Process newProcess);
+    void setProcessor(Processor systemProcessor);
 
-    void push(Process process);
+    void setOS(OperatingSystem parentOS);
 
+    void push(ProcessImpl process);
     boolean isEmpty();
+    String getName();
 }

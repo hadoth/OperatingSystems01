@@ -11,6 +11,10 @@ public class ExponentialDecrease implements ProcessBurstTrend {
         return "EXPDEC";
     }
 
+    public String getFullName() {
+        return "Burst time exponentially decreases";
+    }
+
     @Override
     public int[] generateBurstTime(int processCount, ProcessBurstTime burstTime) {
         int[] result = new int[processCount];

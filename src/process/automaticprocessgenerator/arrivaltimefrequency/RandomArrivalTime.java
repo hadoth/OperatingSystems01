@@ -10,6 +10,11 @@ public class RandomArrivalTime implements ArrivalTimeFrequency {
     }
 
     @Override
+    public String getFullName() {
+        return "Random time between processes";
+    }
+
+    @Override
     public int[] generateArrivalTime(int processCount) {
         int[] result = new int[processCount];
         result[0] = 0;

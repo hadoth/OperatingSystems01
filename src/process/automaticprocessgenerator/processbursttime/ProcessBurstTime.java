@@ -8,7 +8,8 @@ import process.automaticprocessgenerator.processbursttrend.ProcessBurstTrend;
 public enum ProcessBurstTime {
     SMALLER(2, "SMALL"),
     EQUAL(10, "EQUAL"),
-    GREATER(100, "GREATER");
+    GREATER(100, "GREATER"),
+    EVENBIGGER(1000, "BIGGEST");
 
     private int value;
     private String name;
@@ -20,6 +21,9 @@ public enum ProcessBurstTime {
 
     public String getName(){
         return this.name();
+    }
+    public String getFullName(){
+        return "Base burst time: " + this.getValue();
     }
 
     public int getValue(){

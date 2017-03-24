@@ -5,6 +5,7 @@ import os.OperatingSystemImpl;
 import process.Process;
 import process.automaticprocessgenerator.ProcessGenerator;
 import processor.Processor;
+import scheduler.FcfsScheduler;
 import scheduler.Scheduler;
 import utils.Clock;
 
@@ -19,7 +20,7 @@ public class Runtime {
         String savePath = loadPath.replace("csv", "txt");
         Clock systemClock = new Clock();
         Processor systemProcessor = new Processor();
-        Scheduler systemScheduler = new Scheduler();//TODO:implementation
+        Scheduler systemScheduler = new FcfsScheduler();
         OperatingSystem myOS =
             OperatingSystemImpl.builder()
                 .withClock(systemClock)

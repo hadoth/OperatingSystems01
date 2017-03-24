@@ -10,6 +10,13 @@ public class AllAtOnce implements ArrivalTimeFrequency {
     }
 
     @Override
+    public String getFullName() {
+        return "All processes at once";
+    }
+
+
+
+    @Override
     public int[] generateArrivalTime(int processCount) {
         int[] result = new int[processCount];
         for (int i = 0; i < processCount; i++) result[i] = 0;

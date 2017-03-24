@@ -1,6 +1,7 @@
 package scheduler;
 
-import processor.ProcessEvent;
+import os.OperatingSystem;
+import process.ProcessImpl;
 import processor.Processor;
 import processor.ProcessorState;
 
@@ -10,18 +11,54 @@ import java.util.ArrayList;
  * Created by Karol Pokomeda on 2017-03-19.
  */
 public class FcfsScheduler implements Scheduler {
-    private ArrayList<Process> waitingList;
-    private Processor scheduledProcessor;
+    private ArrayList<ProcessImpl> waitingList;
+    private OperatingSystem parentOS;
+    private Processor systemProcessor;
 
-    @Override
-    public void update(ProcessEvent event) {
-        if (event.equals(ProcessorState.READY) && this.waitingList.size() > 0){
-            //this.scheduledProcessor.setProcess(this.waitingList.remove(0));
-        }
+    public FcfsScheduler(){
+        this.waitingList = new ArrayList<>();
     }
 
     @Override
-    public void addProcess(Process newProcess) {
-        this.waitingList.add(newProcess);
+    public void setProcessor(Processor systemProcessor){
+        this.systemProcessor = systemProcessor;
+    }
+
+    @Override
+    public void setOS(OperatingSystem parentOS){
+        this.parentOS = parentOS;
+    }
+
+    @Override
+    public void update(int time) {
+        this.tick(time);
+    }
+
+    @Override
+    public void push(ProcessImpl process) {
+        this.waitingList.add(process);
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return this.waitingList.size() == 0;
+    }
+
+    @Override
+    public String getName() {
+        return "FCFS";
+    }
+
+    private void tick(int time){
+        if (this.systemProcessor.status() == ProcessorState.FINISHED) {
+            ProcessImpl process = this.systemProcessor.pullProcess(time);
+            process.finishFirstPart(time);
+            this.parentOS.push(process);
+        }
+        if (this.systemProcessor.status() == ProcessorState.READY && !this.isEmpty()) {
+            ProcessImpl processToSchedule = this.waitingList.remove(0);
+            processToSchedule.startProcess(time);
+            this.systemProcessor.pushProcess(processToSchedule);
+        }
     }
 }

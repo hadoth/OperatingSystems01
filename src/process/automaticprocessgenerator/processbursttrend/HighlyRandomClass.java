@@ -12,6 +12,11 @@ public class HighlyRandomClass implements ProcessBurstTrend {
     }
 
     @Override
+    public String getFullName() {
+        return "Burst time is slightly randomized";
+    }
+
+    @Override
     public int[] generateBurstTime(int processCount, ProcessBurstTime burstTime) {
         int[] result = new int[processCount];
         for (int i = 0; i < processCount; i++){

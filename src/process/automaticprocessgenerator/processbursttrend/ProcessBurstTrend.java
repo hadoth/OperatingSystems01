@@ -7,5 +7,6 @@ import process.automaticprocessgenerator.processbursttime.ProcessBurstTime;
  */
 public interface ProcessBurstTrend {
     String getName();
+    String getFullName();
     int[] generateBurstTime(int processCount, ProcessBurstTime burstTime);
 }

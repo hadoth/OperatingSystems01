@@ -10,6 +10,11 @@ public class ClusterArrivals implements ArrivalTimeFrequency {
     }
 
     @Override
+    public String getFullName() {
+        return "Processes grouped in clusters";
+    }
+
+    @Override
     public int[] generateArrivalTime(int processCount) {
         int[] result = new int[processCount];
         int i = 0;

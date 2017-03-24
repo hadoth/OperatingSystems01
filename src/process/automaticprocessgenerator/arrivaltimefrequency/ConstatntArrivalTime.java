@@ -10,6 +10,11 @@ public class ConstatntArrivalTime implements ArrivalTimeFrequency {
     }
 
     @Override
+    public String getFullName() {
+        return "Constant time between process arrivals";
+    }
+
+    @Override
     public int[] generateArrivalTime(int processCount) {
         int[] result = new int[processCount];
         for (int i = 0; i < processCount; i++) result[i] = i*20;

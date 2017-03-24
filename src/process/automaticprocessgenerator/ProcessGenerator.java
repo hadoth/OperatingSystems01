@@ -1,15 +1,12 @@
 package process.automaticprocessgenerator;
 
+import process.ProcessImpl;
 import process.automaticprocessgenerator.arrivaltimefrequency.ArrivalTimeFrequency;
 import process.automaticprocessgenerator.bursttimeaccuracy.BurstTimeAccuracy;
 import process.automaticprocessgenerator.processbursttime.ProcessBurstTime;
 import process.automaticprocessgenerator.processbursttrend.ProcessBurstTrend;
-import process.Process;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.UUID;
 
 /**
@@ -25,7 +22,7 @@ public class ProcessGenerator {
     private int[] burstTime;
     private int[] burstTimeEst;
     private int[] arrivalTime;
-    private Process[] processList;
+    private ProcessImpl[] processList;
 
     private ProcessGenerator(){
     }
@@ -68,10 +65,10 @@ public class ProcessGenerator {
         this.burstTime = this.burstTimeTrend.generateBurstTime(this.processCount, this.burstTimeSize);
         this.burstTimeEst = this.burstTimeAccuracy.generateBurstTimeEst(this.burstTime);
         this.arrivalTime = this.arrivalTimeFrequency.generateArrivalTime(this.processCount);
-        this.processList = new Process[this.processCount];
+        this.processList = new ProcessImpl[this.processCount];
 
         for (int i = 0; i < this.processCount; i++){
-            this.processList[i] = new Process(UUID.randomUUID(), this.arrivalTime[i], this.burstTime[i], this.burstTimeEst[i]);
+            this.processList[i] = new ProcessImpl(UUID.randomUUID(), this.arrivalTime[i], this.burstTime[i], this.burstTimeEst[i]);
         }
     }
 

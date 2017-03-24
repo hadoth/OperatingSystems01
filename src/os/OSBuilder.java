@@ -1,6 +1,7 @@
 package os;
 
 import process.Process;
+import process.ProcessImpl;
 import processor.Processor;
 import scheduler.Scheduler;
 import utils.Clock;
@@ -19,27 +20,28 @@ public class OSBuilder {
     private Clock systemClock;
     private Processor systemProcessor;
     private Scheduler systemScheduler;
-    private ArrayList<Process> processQueue;
+    private ArrayList<ProcessImpl> processQueue;
     private boolean consoleFlag = false;
 
-    public OSBuilder withProcesses(ArrayList<Process> processQueue){
+    public OSBuilder withProcesses(ArrayList<ProcessImpl> processQueue){
         this.processQueue = processQueue;
         return this;
     }
 
     public OSBuilder withProcessSource(String filePath){
-        ArrayList<Process> result = new ArrayList<>();
+        ArrayList<ProcessImpl> result = new ArrayList<>();
         File inputFile = new File(filePath);
         try(FileReader fileIn = new FileReader(inputFile);
                 Scanner dataIn = new Scanner(fileIn)){
             while(dataIn.hasNextLine()){
                 String[] processText = dataIn.nextLine().split(", ");
-                result.add(new Process(
+                result.add(new ProcessImpl(
                         UUID.fromString(processText[0]),
                         Integer.parseInt(processText[1]),
                         Integer.parseInt(processText[2]),
                         Integer.parseInt(processText[3])));
             }
+            this.processQueue = result;
         } catch (IOException e){
             throw new IllegalArgumentException("File not found or data corrupted");
         }

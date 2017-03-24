@@ -10,6 +10,11 @@ public class SlightlyRandomBurst implements BurstTimeAccuracy {
     }
 
     @Override
+    public String getFullName() {
+        return "BurstTime accuracy slightly randomized";
+    }
+
+    @Override
     public int[] generateBurstTimeEst(int[] burstTime) {
         int[] result = new int[burstTime.length];
         for (int i = 0; i < burstTime.length; i++) {

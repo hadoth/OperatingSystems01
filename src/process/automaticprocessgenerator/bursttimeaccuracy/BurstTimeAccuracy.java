@@ -5,5 +5,6 @@ package process.automaticprocessgenerator.bursttimeaccuracy;
  */
 public interface BurstTimeAccuracy {
     String getName();
+    String getFullName();
     int[] generateBurstTimeEst(int[] bursTime);
 }

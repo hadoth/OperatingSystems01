@@ -7,5 +7,6 @@ import java.util.ArrayList;
  */
 public interface ArrivalTimeFrequency {
     String getName();
+    String getFullName();
     int[] generateArrivalTime(int processCount);
 }

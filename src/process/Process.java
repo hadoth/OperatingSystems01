@@ -1,41 +1,29 @@
 package process;
 
+
 import java.util.UUID;
 
 /**
- * Class stores basic process characteristics for CPU scheduling simulation
- * Created by Karol Pokomeda on 2017-03-14.
+ * Created by Karol on 2017-03-24.
  */
-public class Process {
-   private UUID processId;
-    private int processArrivalTime;
+public abstract class Process {
     private int burstTime;
     private int burstTimeEstimate;
-    private int burstStartTime;
-    private boolean started = false;
-    private int burstEndTime;
-    private boolean finished = false;
-    private int firstResultTime;
-    private boolean firstResultDone = false;
+    private UUID processId;
 
-    public Process(UUID processId, int processArrivalTime, int burstTime, int burstTimeEstimate){
+    public Process(UUID processId, int burstTime, int burstTimeEst){
         this.processId = processId;
-        this.processArrivalTime = processArrivalTime;
         this.burstTime = burstTime;
-        this.burstTimeEstimate = burstTimeEstimate;
+        this.burstTimeEstimate = burstTimeEst;
     }
 
-    public void tick(){
+    public void tick(int time){
         this.burstTime--;
         if (this.burstTimeEstimate > 0) this.burstTimeEstimate--;
     }
 
     public UUID getProcessId() {
-        return processId;
-    }
-
-    public int getProcessArrivalTime() {
-        return processArrivalTime;
+        return this.processId;
     }
 
     public int getBurstTime() {
@@ -46,50 +34,6 @@ public class Process {
         return burstTimeEstimate;
     }
 
-    public boolean isStarted(){
-        return this.started;
-    }
-
-    public void startProcess(int processorTime){
-        this.started = true;
-        this.burstStartTime = processorTime;
-    }
-
-    public boolean isFinished(){
-        return this.finished;
-    }
-
     public void endProcess(int processorTime){
-        this.finished = true;
-        this.burstEndTime = processorTime;
-    }
-
-    public boolean isFirstResultDone(){
-        return this.firstResultDone;
-    }
-
-    public void finishFirstPart(int processorTime){
-        this.firstResultDone = true;
-        this.firstResultTime = processorTime;
-    }
-
-    public String toString(){
-        return
-                this.processId.toString() + ", " +
-                this.processArrivalTime + ", " +
-                this.burstTime + ", " +
-                this.burstTimeEstimate + ", ";
-    }
-
-    public int getWaitTime(){
-        return this.burstStartTime - this.processArrivalTime;
-    }
-
-    public int getResponseTime(){
-        return this.firstResultTime - this.processArrivalTime;
-    }
-
-    public int getTurnaroundTime(){
-        return this.burstEndTime - this.processArrivalTime;
     }
 }

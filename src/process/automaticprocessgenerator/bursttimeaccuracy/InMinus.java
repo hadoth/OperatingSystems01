@@ -10,6 +10,11 @@ public class InMinus implements BurstTimeAccuracy {
     }
 
     @Override
+    public String getFullName() {
+        return "Burst time always underestimated";
+    }
+
+    @Override
     public int[] generateBurstTimeEst(int[] burstTime) {
         int[] result = new int[burstTime.length];
         for (int i = 0; i < burstTime.length; i++) {

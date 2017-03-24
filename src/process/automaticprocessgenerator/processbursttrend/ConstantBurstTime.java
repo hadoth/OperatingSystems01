@@ -12,6 +12,11 @@ public class ConstantBurstTime implements ProcessBurstTrend {
     }
 
     @Override
+    public String getFullName() {
+        return "Constant burst time value";
+    }
+
+    @Override
     public int[] generateBurstTime(int processCount, ProcessBurstTime burstTime) {
         int[] result = new int[processCount];
         for (int i = 0; i < processCount; i++) result[i] = burstTime.getValue();

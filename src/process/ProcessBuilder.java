@@ -40,11 +40,11 @@ public class ProcessBuilder {
         return this;
     }
 
-    public Process build(){
+    public ProcessImpl build(){
         if (this.processArrivalTime < 0) throw new IllegalArgumentException("Arrival time not specified");
         if (this.processBurstTime <= 0) throw new IllegalArgumentException("Burst time not specified");
         if (this.processBurstTimeEstimate <= 0) this.processBurstTimeEstimate = this.processBurstTime;
-        return new Process(
+        return new ProcessImpl(
                 this.processId,
                 this.processArrivalTime,
                 this.processBurstTime,

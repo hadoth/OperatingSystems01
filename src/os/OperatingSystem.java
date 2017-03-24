@@ -1,6 +1,6 @@
 package os;
 
-import process.Process;
+import process.ProcessImpl;
 import utils.Observer;
 
 /**
@@ -8,6 +8,6 @@ import utils.Observer;
  */
 public interface OperatingSystem extends Observer {
     void run();
-    void push(Process process);
+    void push(ProcessImpl process);
     void generateReport(String path);
 }
