@@ -5,9 +5,10 @@ package processor;
  */
 public enum ProcessorState {
     READY (0),
-    PROCESSING(1),
-    CONTEXT_SWAP(2),
-    SCHEDULING(3),
+    WAITING(1),
+    PROCESSING(2),
+    CONTEXT_SWAP(3),
+    SCHEDULING(4),
     PROCESS_ERROR(-1);
 
     private int stateCode;

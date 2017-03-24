@@ -34,20 +34,18 @@ public class Processor implements Observable, Observer {
             return this.observerList.remove(observer);
         }
         return false;
-
     }
 
     public ProcessorState status() {
-
+        return this.processorStatus;
     }
 
     @Override
     public void update(int time) {
-
+        this.tick(time);
     }
 
-//    @Override
-//    public void nofifyObservers(ProcessEvent event) {
-//        for (int i = 0; i < this.observerList.size(); i++) this.observerList.get(i).update(event);
-//    }
+    private void tick(int time){
+
+    }
 }
