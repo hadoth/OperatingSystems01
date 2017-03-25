@@ -29,11 +29,13 @@ public class Processor implements Observer {
     }
 
     private void tick(int time){
-        this.process.tick(time);
-        if (this.process.getBurstTime() == 0) {
-            this.process.endProcess(time);
-            if (this.process instanceof ProcessImpl)this.processorStatus = ProcessorState.FINISHED;
-            else this.processorStatus = ProcessorState.READY;
+        if (this.process != null) {
+            this.process.tick(time);
+            if (this.process.getBurstTime() == 0) {
+                this.process.endProcess(time);
+                if (this.process instanceof ProcessImpl) this.processorStatus = ProcessorState.FINISHED;
+                else this.processorStatus = ProcessorState.READY;
+            }
         }
     }
 
@@ -49,6 +51,10 @@ public class Processor implements Observer {
         this.process = new ProcessSwap();
         this.processorStatus = ProcessorState.CONTEXT_SWAP;
         return oldProcess;
+    }
+
+    public int burstEstimate(){
+        return this.process.getBurstTimeEstimate();
     }
 
     private class ProcessSwap extends Process{

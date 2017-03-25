@@ -6,7 +6,9 @@ import process.Process;
 import process.automaticprocessgenerator.ProcessGenerator;
 import processor.Processor;
 import scheduler.FcfsScheduler;
+import scheduler.RrScheduler;
 import scheduler.Scheduler;
+import scheduler.SjfScheduler;
 import utils.Clock;
 
 import java.util.ArrayList;
@@ -16,11 +18,13 @@ import java.util.ArrayList;
  */
 public class Runtime {
     public static void main(String[] args){
-        String loadPath = "EVENBIGGER_CONST_CONST_INMINUS.csv";
-        String savePath = loadPath.replace("csv", "txt");
+        String loadPath = "EVENBIGGER_RAND100_RAND_RANDOM100.csv";
         Clock systemClock = new Clock();
         Processor systemProcessor = new Processor();
-        Scheduler systemScheduler = new FcfsScheduler();
+//        Scheduler systemScheduler = new FcfsScheduler();
+//        Scheduler systemScheduler = new SjfScheduler(false);
+//        Scheduler systemScheduler = new SjfScheduler(true);
+        Scheduler systemScheduler = new RrScheduler(1000);
         OperatingSystem myOS =
             OperatingSystemImpl.builder()
                 .withClock(systemClock)
@@ -30,6 +34,8 @@ public class Runtime {
                 .withConsoleOutput()
                 .build();
         myOS.run();
+        String savePath = loadPath.replace(".csv", "_" + systemScheduler.getName() + ".txt");
+        System.out.println(savePath);
         myOS.generateReport(savePath);
     }
 }

@@ -10,9 +10,7 @@ import utils.Observer;
  */
 public interface Scheduler extends Observer {
     void setProcessor(Processor systemProcessor);
-
     void setOS(OperatingSystem parentOS);
-
     void push(ProcessImpl process);
     boolean isEmpty();
     String getName();

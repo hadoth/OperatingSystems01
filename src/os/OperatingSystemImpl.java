@@ -74,10 +74,13 @@ public class OperatingSystemImpl implements Observer, OperatingSystem {
 
         double waitTimeMean = Statistics.meanValue(waitTime);
         double waitTimeDeviation = Statistics.standardDeviation(waitTime);
+        int waitTimeMax = Statistics.maxValue(waitTime);
         double responseTimeMean = Statistics.meanValue(responseTime);
         double responseTimeDeviation = Statistics.standardDeviation(responseTime);
+        int responseTimeMax = Statistics.maxValue(responseTime);
         double turnaroundTimeMean = Statistics.meanValue(turnaroundTime);
         double turnaroundTimeDeviation = Statistics.standardDeviation(turnaroundTime);
+        int turnaroundTimeMax = Statistics.maxValue(turnaroundTime);
 
         File myFile = new File(path);
         try (
@@ -91,17 +94,17 @@ public class OperatingSystemImpl implements Observer, OperatingSystem {
 
             dataOut.println("PROCESSOR REPORT");
             dataOut.println();
-            dataOut.println("Scheduler:\t\t\t" + this.systemScheduler.getName());
+            dataOut.println("Scheduler:\t\t\t" + description[4]);
             dataOut.println("Data burst base:\t\t" + description[0]);
             dataOut.println("Data burst trend :\t\t" + description[1]);
             dataOut.println("Arrival time schema :\t\t" + description[2]);
             dataOut.println("Burst time est. accuracy :\t" + description[3]);
             dataOut.println();
-            dataOut.printf("Mean wait time:\t\t\t%.3f +- %.3f", waitTimeMean, waitTimeDeviation);
+            dataOut.printf("Mean wait time:\t\t\t%.3f +- %.3f (MAX: %d)", waitTimeMean, waitTimeDeviation, waitTimeMax);
             dataOut.println();
-            dataOut.printf("Mean response time:\t\t%.3f +- %.3f", responseTimeMean, responseTimeDeviation);
+            dataOut.printf("Mean response time:\t\t%.3f +- %.3f (MAX: %d)", responseTimeMean, responseTimeDeviation, responseTimeMax);
             dataOut.println();
-            dataOut.printf("Mean trunaround time:\t\t%.3f +- %.3f", turnaroundTimeMean, turnaroundTimeDeviation);
+            dataOut.printf("Mean trunaround time:\t\t%.3f +- %.3f (MAX: %d)", turnaroundTimeMean, turnaroundTimeDeviation, turnaroundTimeMax);
 
 
             if (fileOut != null) fileOut.close();
