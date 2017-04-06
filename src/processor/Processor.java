@@ -59,7 +59,7 @@ public class Processor implements Observer {
 
     private class ProcessSwap extends Process{
         ProcessSwap(){
-            super(UUID.randomUUID(), 10, 10);
+            super(UUID.randomUUID(), 5, 5);
         }
     }
 }

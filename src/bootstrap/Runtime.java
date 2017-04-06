@@ -18,13 +18,13 @@ import java.util.ArrayList;
  */
 public class Runtime {
     public static void main(String[] args){
-        String loadPath = "EVENBIGGER_RAND100_RAND_RANDOM100.csv";
+        String loadPath = "GREATER_LININC_CONST_GOOD.csv";
         Clock systemClock = new Clock();
         Processor systemProcessor = new Processor();
-//        Scheduler systemScheduler = new FcfsScheduler();
+        Scheduler systemScheduler = new FcfsScheduler();
 //        Scheduler systemScheduler = new SjfScheduler(false);
 //        Scheduler systemScheduler = new SjfScheduler(true);
-        Scheduler systemScheduler = new RrScheduler(1000);
+//        Scheduler systemScheduler = new RrScheduler(66);
         OperatingSystem myOS =
             OperatingSystemImpl.builder()
                 .withClock(systemClock)
